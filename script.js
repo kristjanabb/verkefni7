@@ -45,7 +45,7 @@ function play() {
     else {
       stig = stig;
     }
-    
+
     askQuestion = ask();
     spiladirLeikir += 1;
   }
@@ -116,9 +116,7 @@ function getQuestion() {
      break;
  }
 
-
  return {question, answer};
-
 }
 
 function randomNumber(min, max) {
