@@ -13,7 +13,14 @@ const GAMES_TO_PLAY = 10;
  * Eftir leik er notanda boðið að spila annan leik, ef ekki hættir forrit.
  */
 function start() {
-  villa;
+  let playGame = confirm("Markmiðið er að svara eins mörgum af 10 dæmum rétt eins hratt og mögulegt er.")
+  
+  while (playGame){
+    play();
+
+    playGame = confirm("Viltu spila nýjan leik?");
+  } 
+ 
 }
 
 /**
@@ -28,24 +35,104 @@ function start() {
  *
  */
 function play() {
+
+  let spiladirLeikir = 0;
+  let stig = 0;
+
+  let nyrTimi = new Date();
+  
+  let askQuestion = ask();
+  spiladirLeikir += 1;
+
+  while (spiladirLeikir < GAMES_TO_PLAY) {
+
+    if (askQuestion) {
+      stig +=1;
+    }
+
+    else if (askQuestions == null) {
+      alert("Hætt í leik.");
+      return null;
+    }
+    else {
+      stig = stig;
+    }
+    askQuestions = ask();
+    spiladirLeikir += 1;
+  }
+
+  let lokaTimi = new Date();
+  let heildarTimi = (lokaTimi - nyrTimi)/1000;
+
+  if (stig > 0) {
+    return confirm(`Þú svaraðir ${points} af 10 dæmum réttum á ${totalTime.toFixed(2)} sekúndum \nMeðalrétt svör á sekúndu eru ${(totalTime/points).toFixed(2)}.`);
+  }
+  else {
+    return confirm(`Þú svaraðir 0 af 10 dæmum réttum á ${totalTime.toFixed(2)} sekúndum \nMeðalrétt svör á sekúndu eru 0.`)
+  }
 }
 
-/**
- * Spyr einnar spurningar og skilar upplýsingum um svar (mögulega með því að
- * nota true, false og null ef notandi hættir). Birtir notanda propmpt til að
- * svara í og túlkar svarið yfir í tölu.
- *
- * Mögulegar spurningar eru:
- * - `+` dæmi þar sem báðar tölur geta verið á bilinu `[1, 100]`
- * - `-` dæmi þar sem báðar tölur geta verið á bilinu `[1, 100]`
- * - `*` dæmi þar sem báðar tölur geta verið á bilinu `[1, 10]`
- * - `/` dæmi þar sem fyrri tala er á bilinu `[2, 10]` og seinni talan er fyrri
- *   talan sinnum tala á bilinu `[2, 10]` þ.a. svarið verði alltaf heiltala
- *
- * Sniðugt væri að færa það að búa til spurningu í nýtt fall sem ask() kallar í.
- */
 function ask() {
+   let newQuestion = getQuestion();
+
+   let userAnswer = prompt(newQuestion.question);
+ 
+   if (newQuestion.answer == userAnswer) {
+     return true;
+   }
+   else if (userAnswer === null) {
+     return null;
+   }
+   else {
+     return false;
+   }
 }
+
+ // Upphafsgildi
+ let question = "Hvað er ";
+ let answer = 0;
+ let stig = 0;
+
+ let questionType = randomNumber(1, 4);    // Fjórar gerðir af spurningum
+ let a = 0;
+ let b = 0;
+
+ switch(questionType) {
+
+   case 1:
+     a = randomNumber(1, 100);
+     b = randomNumber(1, 100);
+     question += `${a} + ${b}?`;
+     answer = a + b;
+     break;
+
+   case 2:
+     a = randomNumber(1, 100);
+     b = randomNumber(1, 100);
+     question += `${a} - ${b}?`;
+     answer = a - b;
+     break;
+  
+   case 3:
+     a = randomNumber(1, 10);
+     b = randomNumber(1, 10);
+     question += `${a} * ${b}?`
+     answer = a * b;
+     break;
+
+   case 4:
+     a = randomNumber(2, 10);
+     b = a * randomNumber(2, 10);
+     question += `${b} / ${a}?`
+     answer = b / a;
+     break;
+ }
+
+
+ return {question, answer};
+
+
+
 
 /**
  * Skilar tölu af handahófi á bilinu [min, max]
