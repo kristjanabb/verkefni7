@@ -45,6 +45,7 @@ function play() {
     else {
       stig = stig;
     }
+    
     askQuestion = ask();
     spiladirLeikir += 1;
   }
@@ -119,8 +120,6 @@ function getQuestion() {
  return {question, answer};
 
 }
-
-
 
 function randomNumber(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
