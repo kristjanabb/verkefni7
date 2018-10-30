@@ -57,7 +57,7 @@ function play() {
     return confirm(`Þú svaraðir ${stig} af 10 dæmum réttum á ${lokaTimi.toFixed(2)} sekúndum \nMeðalrétt svör á sekúndu eru ${(lokaTimi/stig).toFixed(2)}.`);
   }
   else {
-    return confirm(`Þú svaraðir 0 af 10 dæmum réttum á ${lokaTimi.toFixed(2)} sekúndum \nMeðalrétt svör á sekúndu eru 0.`)
+    return confirm(`Þú svaraðir 0 af 10 dæmum réttum á ${lokaTimi.toFixed(2)} sekúndum \nMeðalrétt svör á sekúndu eru 0.`);
   }
 }
 
